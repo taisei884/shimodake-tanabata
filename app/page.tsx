@@ -74,7 +74,7 @@ export default function Home() {
         setMessage(data.error || 'エラーが発生しました');
         setMessageType('error');
       }
-    } catch (error) {
+    } catch {
       setMessage('通信エラーが発生しました');
       setMessageType('error');
     } finally {
