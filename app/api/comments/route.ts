@@ -16,9 +16,10 @@ const lastPostTimes = new Map<string, number>();
 
 export async function GET() {
   try {
-    const comments = await kv.zrange<Comment>('comments', -10, -1, {
+    // 型アサーションを使用
+    const comments = await kv.zrange('comments', -10, -1, {
       rev: true,
-    });
+    }) as Comment[];
     
     return NextResponse.json(comments || []);
   } catch (error) {
