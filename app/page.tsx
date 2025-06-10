@@ -115,7 +115,7 @@ export default function Home() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="例：たなばた太郎"
-                  className="w-full p-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+                  className="w-full p-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
                   maxLength={20}
                   disabled={isSubmitting}
                 />
@@ -132,7 +132,7 @@ export default function Home() {
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   placeholder="七夕飾りを見た感想や願い事、どちらからお越しかなど..."
-                  className="w-full p-4 border-2 border-gray-200 rounded-xl resize-none focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+                  className="w-full p-4 border-2 border-gray-200 rounded-xl text-gray-800 resize-none focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
                   rows={5}
                   maxLength={200}
                   disabled={isSubmitting}
