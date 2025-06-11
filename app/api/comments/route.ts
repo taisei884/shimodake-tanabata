@@ -16,15 +16,24 @@ const lastPostTimes = new Map<string, number>();
 
 export async function GET() {
   try {
-    // 型アサーションを使用
+    // 最新10件のコメントを取得
     const comments = await kv.zrange('comments', -10, -1, {
       rev: true,
     }) as Comment[];
     
-    return NextResponse.json(comments || []);
+    // 総投稿数を取得
+    const totalCount = await kv.zcard('comments');
+    
+    return NextResponse.json({
+      comments: comments || [],
+      totalCount: totalCount || 0
+    });
   } catch (error) {
     console.error('Error fetching comments:', error);
-    return NextResponse.json([], { status: 500 });
+    return NextResponse.json({
+      comments: [],
+      totalCount: 0
+    }, { status: 500 });
   }
 }
 

@@ -13,6 +13,8 @@ interface Comment {
 
 export default function Display() {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [isNewPost, setIsNewPost] = useState(false);
 
   useEffect(() => {
     // 初期データの取得
@@ -20,7 +22,8 @@ export default function Display() {
       try {
         const response = await fetch('/api/comments');
         const data = await response.json();
-        setComments(data);
+        setComments(data.comments || []);
+        setTotalCount(data.totalCount || 0);
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
@@ -36,6 +39,10 @@ export default function Display() {
         const updated = [comment, ...prev];
         return updated.slice(0, 10);
       });
+      // 新規投稿時にカウントを増やしてアニメーション発動
+      setTotalCount((prev) => prev + 1);
+      setIsNewPost(true);
+      setTimeout(() => setIsNewPost(false), 2000);
     });
 
     return () => {
@@ -62,6 +69,34 @@ export default function Display() {
           />
         ))}
       </div>
+
+{/* アニメーション付きカウンター（右上配置） */}
+      <div className={`absolute top-2 right-2 z-20 flex items-center gap-2 bg-gradient-to-r from-purple-500/40 to-pink-500/40 backdrop-blur-md rounded-full px-4 py-2 border-2 border-white/40 shadow-2xl transform transition-all duration-500 ${
+        isNewPost ? 'scale-110 border-yellow-300/60' : 'scale-100'
+      }`}>
+        <span className={`text-2xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
+          {isNewPost ? '🎉' : '🌟'}
+        </span>
+        <div className="text-center">
+          <p className="text-white/90 text-xs font-medium">総投稿数</p>
+          <p className={`text-2xl font-black transition-all duration-500 ${
+            isNewPost ? 'text-yellow-300 animate-pulse' : 'text-white'
+          }`}>
+            {totalCount.toLocaleString()}
+            <span className="text-sm ml-1">件</span>
+          </p>
+        </div>
+        <span className={`text-2xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
+          {isNewPost ? '🎉' : '🌟'}
+        </span>
+      </div>
+
+      {/* カウンター増加時のエフェクト */}
+      {isNewPost && (
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30">
+          <div className="text-6xl animate-ping">✨</div>
+        </div>
+      )}
 
       {/* ヘッダー */}
       <div className="text-center mb-4 relative z-10">
