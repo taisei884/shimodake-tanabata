@@ -70,23 +70,23 @@ export default function Display() {
         ))}
       </div>
 
-{/* アニメーション付きカウンター（右上配置） */}
-      <div className={`absolute top-2 right-2 z-20 flex items-center gap-2 bg-gradient-to-r from-purple-500/40 to-pink-500/40 backdrop-blur-md rounded-full px-4 py-2 border-2 border-white/40 shadow-2xl transform transition-all duration-500 ${
+        {/* アニメーション付きカウンター（右上配置） */}
+      <div className={`absolute top-4 right-20 z-20 flex items-center gap-2 bg-gradient-to-r from-purple-500/40 to-pink-500/40 backdrop-blur-md rounded-full px-5 py-3 border-2 border-white/40 shadow-2xl transform transition-all duration-500 ${
         isNewPost ? 'scale-110 border-yellow-300/60' : 'scale-100'
       }`}>
-        <span className={`text-2xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
+        <span className={`text-3xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
           {isNewPost ? '🎉' : '🌟'}
         </span>
         <div className="text-center">
-          <p className="text-white/90 text-xs font-medium">総投稿数</p>
-          <p className={`text-2xl font-black transition-all duration-500 ${
+          <p className="text-white/90 text-sm font-medium">総投稿数</p>
+          <p className={`text-3xl font-black transition-all duration-500 ${
             isNewPost ? 'text-yellow-300 animate-pulse' : 'text-white'
           }`}>
             {totalCount.toLocaleString()}
-            <span className="text-sm ml-1">件</span>
+            <span className="text-lg ml-1">件</span>
           </p>
         </div>
-        <span className={`text-2xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
+        <span className={`text-3xl transition-all duration-500 ${isNewPost ? 'animate-bounce' : ''}`}>
           {isNewPost ? '🎉' : '🌟'}
         </span>
       </div>
